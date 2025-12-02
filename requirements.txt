@@ -1,0 +1,6 @@
+# RC-600 Patch Manager Requirements
+
+# TUI Framework
+textual>=0.47.0
+
+# Python 3.8+ required
