@@ -99,6 +99,173 @@ class Track:
         return self.node.tag
 
     @property
+    def settings(self):
+        """Return self for API consistency (track.settings.reverse, etc.)"""
+        return self
+
+    def _get_param(self, tag, default=0):
+        """Get parameter value by tag"""
+        elem = self.node.find(tag)
+        if elem is not None and elem.text:
+            return int(elem.text)
+        return default
+
+    def _set_param(self, tag, value):
+        """Set parameter value by tag"""
+        elem = self.node.find(tag)
+        if elem is not None:
+            elem.text = str(int(value))
+
+    # Playback Settings
+    @property
+    def reverse(self):
+        """0 = OFF, 1 = ON"""
+        return self._get_param('A')
+
+    @reverse.setter
+    def reverse(self, value):
+        self._set_param('A', value)
+
+    @property
+    def one_shot(self):
+        """0 = OFF (Loop), 1 = ON (One Shot)"""
+        return self._get_param('B')
+
+    @one_shot.setter
+    def one_shot(self, value):
+        self._set_param('B', value)
+
+    @property
+    def balance(self):
+        """Pan balance (0-100)"""
+        return self._get_param('C')
+
+    @balance.setter
+    def balance(self, value):
+        self._set_param('C', value)
+
+    @property
+    def play_level(self):
+        """Track playback volume"""
+        return self._get_param('D')
+
+    @play_level.setter
+    def play_level(self, value):
+        self._set_param('D', value)
+
+    @property
+    def playback_fx(self):
+        """FX applied during playback: 0 = OFF, 1 = ON"""
+        return self._get_param('E')
+
+    @playback_fx.setter
+    def playback_fx(self, value):
+        self._set_param('E', value)
+
+    # Track Type and Modes
+    @property
+    def track_type(self):
+        """0 = Multi, 1 = Single"""
+        return self._get_param('F')
+
+    @track_type.setter
+    def track_type(self, value):
+        self._set_param('F', value)
+
+    @property
+    def tempo_sync(self):
+        """0 = OFF, 1 = ON"""
+        return self._get_param('G')
+
+    @tempo_sync.setter
+    def tempo_sync(self, value):
+        self._set_param('G', value)
+
+    @property
+    def playback_mode(self):
+        """0 = Multi, 1 = Serial"""
+        return self._get_param('H')
+
+    @playback_mode.setter
+    def playback_mode(self, value):
+        self._set_param('H', value)
+
+    @property
+    def start_trigger_mode(self):
+        """Start trigger mode"""
+        return self._get_param('I')
+
+    @start_trigger_mode.setter
+    def start_trigger_mode(self, value):
+        self._set_param('I', value)
+
+    @property
+    def stop_mode(self):
+        """Stop mode"""
+        return self._get_param('J')
+
+    @stop_mode.setter
+    def stop_mode(self, value):
+        self._set_param('J', value)
+
+    @property
+    def overdub_mode(self):
+        """Overdub mode"""
+        return self._get_param('K')
+
+    @overdub_mode.setter
+    def overdub_mode(self, value):
+        self._set_param('K', value)
+
+    # FX Assignments
+    @property
+    def fx1_assign(self):
+        """0 = None, 1 = Enabled"""
+        return self._get_param('L')
+
+    @fx1_assign.setter
+    def fx1_assign(self, value):
+        self._set_param('L', value)
+
+    @property
+    def fx2_assign(self):
+        """0 = None, 1 = Enabled"""
+        return self._get_param('M')
+
+    @fx2_assign.setter
+    def fx2_assign(self, value):
+        self._set_param('M', value)
+
+    @property
+    def fx3_assign(self):
+        """0 = None, 1 = Enabled"""
+        return self._get_param('N')
+
+    @fx3_assign.setter
+    def fx3_assign(self, value):
+        self._set_param('N', value)
+
+    # Timing Settings
+    @property
+    def rhythm_sync(self):
+        """Sync with rhythm section"""
+        return self._get_param('O')
+
+    @rhythm_sync.setter
+    def rhythm_sync(self, value):
+        self._set_param('O', value)
+
+    @property
+    def quantize(self):
+        """0 = OFF, 1 = ON"""
+        return self._get_param('P')
+
+    @quantize.setter
+    def quantize(self, value):
+        self._set_param('P', value)
+
+    # Legacy input setup property (keep for compatibility)
+    @property
     def input_setup(self):
         num = int(self.node.find('Q').text, 10)
         result = {}

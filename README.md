@@ -44,12 +44,25 @@ python3 rc600_tui.py
 
 Features:
 - Modern, interactive terminal UI with mouse and keyboard support
+- **Performance Optimizations**:
+  - Patches are cached after first load for instant access
+  - Modified patches shown with • indicator
+  - Changes staged in memory before saving to disk
+  - Global "Apply All Changes" button to save all modifications at once
 - **Two-panel layout**:
   - **Left panel**: Live view of all patches (slots 0-99) with their names
   - **Right panel**: Detailed view of selected patch showing:
-    - **Editable patch name** - Edit and save patch names directly from the detail view
+    - **Pending Changes Counter** - Shows how many patches have unsaved changes (names, copy operations, track settings)
+    - **Editable patch name** - Edit and stage name changes (not saved until Apply)
+    - **Copy Settings** - Stage copy operations (effects and assigns) to multiple targets
     - Patch bank, count, and BPM information
-    - All 6 tracks with their input configurations (Mic 1/2, Inst 1L/1R/2L/2R, Rhythm) in table format
+    - **Clickable Track Table** - Click any track to edit detailed settings:
+      - Playback settings (Reverse, One Shot, Playback FX, Balance, Play Level)
+      - Track type & modes (Track Type, Tempo Sync, Playback Mode, Start/Stop/Overdub modes)
+      - FX assignments (FX1, FX2, FX3)
+      - Timing settings (Rhythm Sync, Quantize)
+      - All changes staged and applied together
+    - Track input configurations (Mic 1/2, Inst 1L/1R/2L/2R, Rhythm) in table format
     - Scrollable view to see all track details
 - **Tools menu** accessible via keyboard shortcuts:
   - `R` - Refresh patches
